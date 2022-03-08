@@ -1,5 +1,6 @@
 import _ from "underscore";
 import $ from "cash-dom";
+import demoHtml from './demo.html'
 
 // let _ = require("underscore")
 // let $= require("cash-dom")
@@ -7,23 +8,23 @@ import $ from "cash-dom";
 let baseclassorid="logo_"
 
 export function  makehtml(){
-    let dom = ```
-    <div><button id="${baseclassorid}btn">test</button> </div>
-    ```
+    let dom = demoHtml;
     var compiledDom = _.template(dom)
-    return  compiledDom({});
+    return  compiledDom({
+        baseclassorid
+    });
 
 
 };
 
 export function showhtml(appclassname,html){
-    $(```#${appclassname} ```).append(html)
+    $("."+appclassname).append(html)
 
 
 }
 
-export function bindEvent(){
-    $(```#${appclassname} ```).find(```${baseclassorid}btn```).on( "click",btnclick)
+export function bindEvent(appclassname){
+    $("."+appclassname).find("#"+baseclassorid+"btn").on( "click",btnclick)
 }
 
 export function btnclick(){

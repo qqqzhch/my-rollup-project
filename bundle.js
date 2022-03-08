@@ -3113,28 +3113,30 @@ var myBundle = (function () {
       return filtered(cash(unique(pluck(this, ele => cash(ele).parent().children().not(ele)))), comparator);
   };
 
+  var demoHtml = "<div><button id=\"<%= baseclassorid %>btn\">test</button></div>\n";
+
   // let _ = require("underscore")
   // let $= require("cash-dom")
 
   let baseclassorid="logo_";
 
   function  makehtml(){
-      let dom = ```
-    <div><button id="${baseclassorid}btn">test</button> </div>
-    ```;
+      let dom = demoHtml;
       var compiledDom = _.template(dom);
-      return  compiledDom({});
+      return  compiledDom({
+          baseclassorid
+      });
 
 
   }
   function showhtml(appclassname,html){
-      cash(```#${appclassname} ```).append(html);
+      cash("."+appclassname).append(html);
 
 
   }
 
-  function bindEvent(){
-      cash(```#${appclassname} ```).find(```${baseclassorid}btn```).on( "click",btnclick);
+  function bindEvent(appclassname){
+      cash("."+appclassname).find("#"+baseclassorid+"btn").on( "click",btnclick);
   }
 
   function btnclick(){
@@ -3145,7 +3147,7 @@ var myBundle = (function () {
   function openPanel(appclassname){
       let html = makehtml();
       showhtml(appclassname,html);
-      bindEvent();
+      bindEvent(appclassname);
   }
 
   var main = {

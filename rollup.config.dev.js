@@ -11,6 +11,8 @@ import less from 'rollup-plugin-less';
 import html from '@rollup/plugin-html';
 import image from '@rollup/plugin-image'
 
+import pluginhtml from 'rollup-plugin-html';
+console.log(pluginhtml)
 
 export default {
     input: './src/main.js',
@@ -26,7 +28,7 @@ export default {
             contentBase: '',
             openPage: '/test/',
         }),
-        livereload("src")
+        livereload("src"),       
       ]
     },
     plugins: [ 
@@ -34,7 +36,9 @@ export default {
       html(),
       image(),
       commonjs(), 
-      resolve() 
-      
+      resolve(), 
+      pluginhtml({
+        include: './src/**/*.html'
+      })
       ]
   };
